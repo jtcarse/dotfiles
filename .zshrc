@@ -1,3 +1,11 @@
+################
+# Requirements #
+################
+# + Git        #
+# + Ruby + Gem #
+# + Dev tools  #
+################
+
 ##########
 # iTerm2 #
 ##########
@@ -30,7 +38,14 @@ fi
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 else
-  echo "zprezto not installed"
+  if [[ -x "$(which git)" ]]; then
+    echo "installing zprezto..."
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+    rm "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc"
+    ln -s "$HOME/.zshrc" "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc"
+  else
+    echo "zprezto not installed -- missing git"
+  fi
 fi
 
 
@@ -78,6 +93,8 @@ if [[ -x $(which brew) ]]; then
   else
     echo "z not installed"
   fi
+else
+  echo "brew not found -- skipped z"
 fi
 
 # asdf
@@ -87,6 +104,8 @@ if [[ -x $(which brew) ]]; then
   else
     echo "asdf not installed"
   fi
+else
+  echo "brew not found -- skipped asdf"
 fi
 
 # asdf-direnv
