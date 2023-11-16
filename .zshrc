@@ -15,7 +15,11 @@ function iterm2_print_user_vars() {
 # Homebrew #
 ############
 
-FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+if [[ -x $(which brew) ]]; then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+else
+  echo "homebrew not installed"
+fi
 
 
 #####################
@@ -57,8 +61,8 @@ alias t="tmux"
 ###########
 
 # colorls autocomplete
-if [ -x $(which gem) ]; then
-  if [ -s $(gem which colorls) ]; then
+if [ -x "$(which gem)" ]; then
+  if [ -s "$(gem which colorls)" ]; then
     source $(dirname $(gem which colorls))/tab_complete.sh
   else
     echo "colorls not installed"
@@ -68,17 +72,21 @@ else
 fi
 
 # z
-if [ -s "$(brew --prefix)/etc/profile.d/z.sh" ]; then
-  source "$(brew --prefix)/etc/profile.d/z.sh"
-else
-  echo "z not installed"
+if [[ -x $(which brew) ]]; then
+  if [ -s "$(brew --prefix)/etc/profile.d/z.sh" ]; then
+    source "$(brew --prefix)/etc/profile.d/z.sh"
+  else
+    echo "z not installed"
+  fi
 fi
 
 # asdf
-if [ -s "$(brew --prefix asdf)/libexec/asdf.sh" ]; then
-  . "$(brew --prefix asdf)/libexec/asdf.sh"
-else
-  echo "asdf not installed"
+if [[ -x $(which brew) ]]; then
+  if [ -s "$(brew --prefix asdf)/libexec/asdf.sh" ]; then
+    . "$(brew --prefix asdf)/libexec/asdf.sh"
+  else
+    echo "asdf not installed"
+  fi
 fi
 
 # asdf-direnv
@@ -88,11 +96,9 @@ else
   echo "asdf-direnv not installed"
 fi
 
-# load .zshrc.nogit
+# load .zshrc.nogit if found
 if [ -s $HOME/.zshrc.nogit ]; then
   source $HOME/.zshrc.nogit
-else
-  echo "no .zshrc.nogit found"
 fi
 
 
