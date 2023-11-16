@@ -41,8 +41,12 @@ else
   if [[ -x "$(which git)" ]]; then
     echo "installing zprezto..."
     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-    rm "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc"
-    ln -s "$HOME/.zshrc" "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc"
+    rm "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zlogin" && ln -s "$HOME/.zlogin" "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zlogin"
+    rm "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zlogout" && ln -s "$HOME/.zlogout" "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zlogout"
+    rm "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zpreztorc" && ln -s "$HOME/.zpreztorc" "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zpreztorc"
+    rm "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zprofile" && ln -s "$HOME/.zprofile" "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zprofile"
+    rm "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshenv" && ln -s "$HOME/.zshenv" "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshenv"
+    rm "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc" && ln -s "$HOME/.zshrc" "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc"
   else
     echo "zprezto not installed -- missing git"
   fi
