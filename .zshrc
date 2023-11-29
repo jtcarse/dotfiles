@@ -54,41 +54,8 @@ fi
 
 
 ###########
-# Aliases #
-###########
-
-# kubernetes
-alias k="kubectl "
-alias klx="kubectl config get-contexts"
-alias knx='f() { [ "$1" ] && kubectl config set-context --current --namespace $1 || kubectl config view --minify | grep namespace | cut -d" " -f6 ; } ; f'
-alias kcx='f() { [ "$1" ] && kubectl config use-context $1 || kubectl config current-context ; } ; f'
-alias kdx='f() { [ "$1" ] && kubectl config delete-context $1 || echo "error: missing argument <context>" ; } ; f'
-alias kpf='f() { [ $# -eq 2 ] && kubectl port-forward svc/$1 $2 || echo "usage: kpf <svc> <port>" ; } ; f'
-
-# misc
-alias dot='git --git-dir=$HOME/.dot/ --work-tree=$HOME'
-alias vim="nvim"
-alias docker-prune="docker system prune --all --force --volumes"
-alias ls="colorls --group-directories-first"
-alias h="$HOME"
-alias tf="terraform"
-alias t="tmux"
-
-
-###########
 # Sources #
 ###########
-
-# colorls autocomplete
-if [ -x "$(which gem)" ]; then
-  if [ -s "$(gem which colorls)" ]; then
-    source $(dirname $(gem which colorls))/tab_complete.sh
-  else
-    echo "colorls not installed"
-  fi
-else
-  echo "gem not installed"
-fi
 
 # z
 if [[ -x $(which brew) ]]; then
@@ -123,6 +90,39 @@ fi
 if [ -s $HOME/.zshrc.nogit ]; then
   source $HOME/.zshrc.nogit
 fi
+
+# colorls autocomplete
+if [ -x "$(which gem)" ]; then
+  if [ -s "$(gem which colorls)" ]; then
+    source $(dirname $(gem which colorls))/tab_complete.sh
+  else
+    echo "colorls not installed"
+  fi
+else
+  echo "gem not installed"
+fi
+
+
+###########
+# Aliases #
+###########
+
+# kubernetes
+alias k="kubectl "
+alias klx="kubectl config get-contexts"
+alias knx='f() { [ "$1" ] && kubectl config set-context --current --namespace $1 || kubectl config view --minify | grep namespace | cut -d" " -f6 ; } ; f'
+alias kcx='f() { [ "$1" ] && kubectl config use-context $1 || kubectl config current-context ; } ; f'
+alias kdx='f() { [ "$1" ] && kubectl config delete-context $1 || echo "error: missing argument <context>" ; } ; f'
+alias kpf='f() { [ $# -eq 2 ] && kubectl port-forward svc/$1 $2 || echo "usage: kpf <svc> <port>" ; } ; f'
+
+# misc
+alias dot='git --git-dir=$HOME/.dot/ --work-tree=$HOME'
+alias vim="nvim"
+alias docker-prune="docker system prune --all --force --volumes"
+alias ls="colorls --group-directories-first"
+alias h="$HOME"
+alias tf="terraform"
+alias t="tmux"
 
 
 ###########
