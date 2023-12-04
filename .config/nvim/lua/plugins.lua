@@ -32,4 +32,5 @@ return {
   { "github/copilot.vim" },
   { "kamwitsta/commentToggle" },
   { "loctvl842/monokai-pro.nvim" },
+  { "rebelot/kanagawa.nvim" },
 }

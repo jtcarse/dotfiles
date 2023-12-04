@@ -38,7 +38,7 @@ require('monokai-pro').setup()
 require('nvim-juliana').setup()
 
 --set colorscheme
-vim.cmd('colorscheme juliana')
+vim.cmd('colorscheme kanagawa-wave')
 
 --treesitter
 require('nvim-treesitter.configs').setup({
